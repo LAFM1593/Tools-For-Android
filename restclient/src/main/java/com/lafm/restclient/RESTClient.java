@@ -50,6 +50,8 @@ public class RESTClient{
 
     private long elapsedTime;
 
+    private int number;
+
     public RESTClient(String URL, InputStream certificate) {
         this.URL = URL;
 
@@ -67,7 +69,7 @@ public class RESTClient{
         return new Gson().fromJson(_POST(dataJSON), type);
     }
 
-    public <T> T POST(int number, Context context, Class<T> type, String method, String data) {
+    public <T> T POST(Context context, Class<T> type, String method, String data) {
 
         String result = _POST(method + "=" + data);
 
@@ -355,6 +357,14 @@ public class RESTClient{
 
     public long getElapsedTime() {
         return elapsedTime;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public static void registrarLog(int number, String description, int code, long elapsedTime, Object request, Object response, Context context) {
