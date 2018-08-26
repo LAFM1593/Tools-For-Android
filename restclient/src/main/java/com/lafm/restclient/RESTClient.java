@@ -67,7 +67,7 @@ public class RESTClient{
         return new Gson().fromJson(_POST(dataJSON), type);
     }
 
-    public <T> T POST(Context context, Class<T> type, String method, String data) {
+    public <T> T POST(int number, Context context, Class<T> type, String method, String data) {
 
         String result = _POST(method + "=" + data);
 
@@ -75,12 +75,12 @@ public class RESTClient{
 
             JsonParser parser = new JsonParser();
 
-            registrarLog(method, code, elapsedTime,
+            registrarLog(number, method, code, elapsedTime,
                     parser.parse(data).getAsJsonObject(),
                     parser.parse(result).getAsJsonObject(), context);
 
         }catch (Exception ex){
-            registrarLog(method, code, elapsedTime, data, result, context);
+            registrarLog(number, method, code, elapsedTime, data, result, context);
         }
 
 
@@ -357,11 +357,11 @@ public class RESTClient{
         return elapsedTime;
     }
 
-    public static void registrarLog(String decripcion, int code, long elapsedTime, Object request, Object response, Context context) {
+    public static void registrarLog(int number, String description, int code, long elapsedTime, Object request, Object response, Context context) {
 
         try {
 
-            String data = new LogGSON(code, decripcion, request, response, elapsedTime + "").toString();
+            String data = new LogGSON(number, code, description, request, response, elapsedTime + "").toString();
 
             String ruta = context.getFilesDir().getPath().toString() + "/log.json";
 
