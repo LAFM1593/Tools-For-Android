@@ -68,6 +68,8 @@ public class RESTClient{
 
         String result = _POST(method + "=" + data);
 
+        registrarLog(method, code, elapsedTime, data, result, context);
+
         return new Gson().fromJson(result, type);
     }
 
@@ -358,7 +360,7 @@ public class RESTClient{
 
             bw.close();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
