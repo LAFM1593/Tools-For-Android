@@ -3,6 +3,9 @@ package com.lafm.restclient;
 import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -68,7 +71,20 @@ public class RESTClient{
 
         String result = _POST(method + "=" + data);
 
-        registrarLog(method, code, elapsedTime, data, result, context);
+        try{
+
+            JsonParser parser = new JsonParser();
+
+            registrarLog(method, code, elapsedTime,
+                    parser.parse(data).getAsJsonObject(),
+                    parser.parse(result).getAsJsonObject(), context);
+
+        }catch (Exception ex){
+            registrarLog(method, code, elapsedTime, data, result, context);
+        }
+
+
+
 
         return new Gson().fromJson(result, type);
     }
