@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class LogGSON {
 
+    private int number;
+
     private int code;
 
     private String description;
@@ -25,12 +27,13 @@ public class LogGSON {
         date = DATE_FORMAT.format(new Date());
     }
 
-    public LogGSON(int code, String description, Object request, Object response, String elapsed_time) {
+    public LogGSON(int number, int code, String description, Object request, Object response, String elapsed_time) {
         this.code = code;
         this.description = description;
         this.request = request;
         this.response = response;
         this.elapsed_time = elapsed_time;
+        this.number = number;
 
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
         date = DATE_FORMAT.format(new Date());
@@ -74,6 +77,22 @@ public class LogGSON {
 
     public void setElapsed_time(String elapsed_time) {
         this.elapsed_time = elapsed_time;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
