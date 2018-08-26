@@ -349,6 +349,8 @@ public class RESTClient{
 
             String ruta = context.getFilesDir().getPath().toString() + "/log.json";
 
+            Log.e(TAG, "FilesDir().getPath()" + ruta);
+
             File archivo = new File(ruta);
             BufferedWriter bw;
             if(archivo.exists())
@@ -361,6 +363,9 @@ public class RESTClient{
             bw.close();
 
         } catch (Exception e) {
+
+            Log.e(TAG, "FilesDir().getPath()" + e.getMessage());
+
             e.printStackTrace();
         }
     }
